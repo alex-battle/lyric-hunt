@@ -77,7 +77,13 @@ async function getLyrics(artist, songTitle) {
     const res = await fetch(`${apiURL}/v1/${artist}/${songTitle}`)
     const data = await res.json()
     console.log(data)
-    
+
+    const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>')
+    // check for any returns/new line or just return or just new line and replace it with a <br>
+    result.innerHTML = `<h2><strong>${artist}</strong> - ${songTitle}</h2>
+    <span> ${lyrics}</span>`
+
+    more.innerHTML = ''
 }
 // Event Listeners
 form.addEventListener('submit', e =>{
