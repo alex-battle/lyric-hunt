@@ -21,20 +21,55 @@ async function searchSongs(term){
 }
 
 // Show song and artist in the DOM
+
+// function showData(data){
+//     let output = ''
+//     data.data.forEach(song =>{
+//         output += `
+//         <li>
+//         <span><strong>${song.artist.name}</strong> - ${song.title}</span>
+//         <button class="btn" data-artist="${song.artist.name}" 
+//         data-songtitle="${song.title}">Get Lyrics</button>
+//         </li>`
+//     })
+//     result.innerHTML = `
+//     <ul class="songs">
+//     ${output}
+//     </ul>`
+// }
 function showData(data){
-    let output = ''
-    data.data.forEach(song =>{
-        output += `
-        <li>
-        <span><strong>${song.artist.name}</strong> - ${song.title}</span>
-        <button class="btn" data-artist="${song.artist.name}" 
-        data-songtitle="${song.title}">Get Lyrics</button>
-        </li>`
-    })
-    result.innerHTML = `
-    <ul class="songs">
-    ${output}
+    result.innerHTML = 
+    `<ul class="songs">
+    ${data.data.map(song => `<li>
+    <span><strong>${song.artist.name}</strong> - ${song.title}</span>
+    <button class="btn" data-artist="${song.artist.name}" 
+    data-songtitle="${song.title}">Get Lyrics</button>
+    </li>`)
+    .join('')}
     </ul>`
+
+    // Back/More button
+    if(data.prev || data.next){
+        more.innerHTML = `
+        ${data.prev ? `<button class="btn" onclick="getMoreSongs('${data.prev}')">Prev</button>` 
+        : ''}
+        ${data.next ? `<button class="btn" onclick="getMoreSongs('${data.next}')">Next</button>` 
+        : ''}
+        `;
+    } else{more.innerHTML = ''
+}
+    
+}
+
+// get prev and next songs
+async function getMoreSongs(url) {
+    const res = await fetch(url)
+    // const res = await fetch(`https://cors-anywhere.herokuapp.com/${url}`)
+    const data = await res.json()
+    // console.log(data)
+
+    showData(data)
+    
 }
 
 // Event Listeners
