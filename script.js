@@ -76,7 +76,7 @@ async function getMoreSongs(url) {
 async function getLyrics(artist, songTitle) {
     const res = await fetch(`${apiURL}/v1/${artist}/${songTitle}`)
     const data = await res.json()
-    console.log(data)
+    // console.log(data)
 
     const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g, '<br>')
     // check for any returns/new line or just return or just new line and replace it with a <br>
@@ -101,11 +101,11 @@ form.addEventListener('submit', e =>{
 
 // Get Lyrics button click
 result.addEventListener('click', e=>{
-    console.log(e.target)
+    // console.log(e.target)
 
     const clickedEl = e.target;
     if(clickedEl.tagName === 'BUTTON'){
-        console.log(123)
+        // console.log(123)
         const artist = clickedEl.getAttribute('data-artist')
         const songTitle = clickedEl.getAttribute('data-songtitle')
 
