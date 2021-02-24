@@ -1,5 +1,8 @@
 # lyric-hunt
 
+DEMO LINK: https//alex-lyric-hunt.surge.sh
+
+
 Find songs/artists and lyrics using the [lyrics.ovh](https://lyrics.ovh) API
 
 ## Project Specifications
